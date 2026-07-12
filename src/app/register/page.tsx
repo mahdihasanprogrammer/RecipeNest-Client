@@ -9,7 +9,6 @@ import { FiCheckCircle, FiHeart, FiEye, FiEyeOff, FiBookOpen } from 'react-icons
 import { LuSparkles, LuUserPlus } from 'react-icons/lu';
 import { FcGoogle } from 'react-icons/fc';
 import { PiChefHat } from 'react-icons/pi';
-import { TRegisterUser } from '@/types/interface';
 import { signIn, signUp } from '@/lib/auth-client';
 
 const RegisterPage = () => {
@@ -23,16 +22,19 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       const form = new FormData(e.currentTarget);
-      const formData = Object.fromEntries(form.entries()) as TRegisterUser;
+      const name = form.get('name') as string;
+      const image = form.get('image') as string;
+      const email = form.get('email') as string;
+      const password = form.get('password') as string;
 
-      const role: string = "user";
 
       const { data, error } = await signUp.email({
-        name: formData.name,
-        image: formData.image,
-        email: formData.email,
-        password: formData.password,
-        userRole: role as string,
+        name: name,
+        image: image,
+        email: email,
+        password: password,
+
+
       })
       console.log(data, "test")
 
@@ -51,6 +53,7 @@ const RegisterPage = () => {
     }
   };
 
+  // continue with Google sign-in flow
   const handleGoogleSignIn = async () => {
 
     try {
@@ -65,7 +68,7 @@ const RegisterPage = () => {
     finally {
       setGoogleLoading(false);
     }
-    
+
   }
   // Rebranded color token classes matching the Terracotta/Amber & Neutral gray palette
   const inputClass = "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-amber-500/60 focus:bg-white/10 transition-all duration-200";

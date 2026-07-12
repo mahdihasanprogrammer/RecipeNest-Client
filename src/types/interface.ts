@@ -1,8 +1,9 @@
 
-export interface TRegisterUser {
+export interface TUser {
     id?: string;
     name:string;
     image?:string;
     email: string;
     password: string;
+    userRole: string
 }
