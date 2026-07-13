@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiPhone, FiMapPin, FiHeart, FiFacebook } from "react-icons/fi";
+import { usePathname } from "next/navigation";
 
 interface SocialLink {
     icon: React.ReactNode;
@@ -57,6 +58,10 @@ export default function Footer() {
         }
     ];
 
+    const pathName = usePathname();
+    if(pathName.includes("/dashboard")) {
+        return null; 
+    }
     return (
         <footer className="relative w-full bg-[#0c0908] text-white border-t border-white/5 pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
             
