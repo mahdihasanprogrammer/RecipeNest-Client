@@ -24,5 +24,12 @@ export interface TRecipe {
     creatorName: string,
     creatorEmail: string,
     creatorId: string,
-    creatorImage: string
+    creatorImage: string,
+    createdAt?: string,
+    _id?: string
+}
+
+export interface TSuccess {
+    success: string,
+    message: string
 }
