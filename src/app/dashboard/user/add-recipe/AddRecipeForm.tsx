@@ -6,6 +6,7 @@ import { FiPlus, FiTrash2, FiCheckCircle } from "react-icons/fi";
 import { TRecipe, TUser } from "@/types/interface";
 import { createRecipe } from "@/lib/actions/recipes";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const URL_REGEX = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
 
@@ -22,6 +23,7 @@ type AddRecipeFormProps={
 };
 export default function AddRecipeForm({ user}:AddRecipeFormProps) {
     const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     // ডাইনামিক ফিল্ডের ট্র্যাক রাখার জন্য মিনিমাল স্টেট
     const [ingredients, setIngredients] = useState<string[]>([""]);
@@ -70,6 +72,7 @@ export default function AddRecipeForm({ user}:AddRecipeFormProps) {
                 e.target.reset();
                 setSteps([""]);
                 setIngredients([""]);
+                router.push('/dashboard/user/my-recipes')
             }
 
         } catch (error) {

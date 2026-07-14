@@ -1,8 +1,8 @@
 import { TRecipe, TSuccess } from "@/types/interface";
 import { serverMutation } from "../core/server"
 
-export const createRecipe = async (recipeData:TRecipe) =>{
-    const result = serverMutation(`/api/add-recipe`, recipeData);
+export const createRecipe = async (recipeData:TRecipe):Promise<TSuccess> =>{
+    const result = serverMutation<TSuccess>(`/api/add-recipe`, recipeData);
     return result
 }   
 export const DeleteRecipe = async (recipeId : string):Promise<TSuccess> =>{
