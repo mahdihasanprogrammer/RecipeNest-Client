@@ -33,3 +33,11 @@ export interface TSuccess {
     success: string,
     message: string
 }
+
+export interface TContributors{
+    creatorId: string,
+    creatorName:string,
+    creatorEmail: string,
+    creatorImage: string,
+    contribute: number
+}

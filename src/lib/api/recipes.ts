@@ -1,4 +1,4 @@
-import { TRecipe } from "@/types/interface";
+import { TContributors, TRecipe } from "@/types/interface";
 import { serverFetch } from "../core/server"
 
 export type TRecipeResponse = {
@@ -29,5 +29,12 @@ export const getAllRecipes = async(query : string):Promise<TRecipeResponse> =>{
 //get recipe by id not protected;
 export const getRecipeById = async(recipeId:string) :Promise<TRecipe> =>{
     const result = await serverFetch<TRecipe>(`/api/recipes/${recipeId}`);
+    return result;
+}
+
+
+// get top contributors , not protected;
+export const getTopContributors = async ():Promise<TContributors[]> =>{
+    const result = serverFetch<TContributors[]>(`/api/recipes/top-contributors`);
     return result;
 }
