@@ -69,9 +69,9 @@ const MyRecipesPage = async () => {
                     {/* মেইন সিটিএ বাটন */}
                     <Link 
                         href="/dashboard/user/add-recipe" 
-                        className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-95 text-white font-bold px-8 py-3.5 rounded-2xl flex items-center gap-2.5 shadow-xl shadow-orange-500/10 hover:shadow-orange-500/20 transition-all text-sm md:text-base cursor-pointer"
+                        className="bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-95 text-white font-bold px-8 py-3.5 rounded-2xl flex items-center gap-2.5 shadow-xl shadow-orange-500/10 hover:shadow-orange-500/20 transition-all text-sm md:text-base cursor-pointer"
                     >
-                        <FiPlus className="w-5 h-5 stroke-[3]" /> Create My First Recipe
+                        <FiPlus className="w-5 h-5 stroke-0.5" /> Create My First Recipe
                     </Link>
                 </div>
             )}

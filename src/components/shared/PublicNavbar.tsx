@@ -49,9 +49,9 @@ export default function PublicNavbar() {
   const isAdmin = session?.user?.userRole === 'admin';
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-[#0f0d0b]/90 backdrop-blur-md border-b border-white/10 text-white transition-all">
+    <nav className="sticky top-0 left-0 w-full z-50 bg-[#0f0d0b]/90 backdrop-blur-md border-b border-white/10 text-white transition-all">
       {/* Tailwind Container Utility applied here */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
         <div className="flex items-center justify-between h-16">
           
           {/* Brand Logo */}

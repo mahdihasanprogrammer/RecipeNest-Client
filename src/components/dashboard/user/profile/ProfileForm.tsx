@@ -54,7 +54,7 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
       });
 
       // Better Auth cookie cache bypass — na hole reload-e purono data ferot ashe
-    //   await authClient.getSession({ query: { disableCookieCache: true } });
+      await authClient.getSession({ query: { disableCookieCache: true } });
 
       setDisplayName(name.trim());
       setDisplayImage(imageUrl.trim());

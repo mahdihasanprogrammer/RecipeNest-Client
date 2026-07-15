@@ -184,8 +184,8 @@ export default function AddRecipeForm({ user}:AddRecipeFormProps) {
                         <FieldError className="text-xs text-danger" />
                     </TextField>
                 ))}
-                <Button type="button" size="sm" variant="ghost" className="border-orange-500/30 text-orange-400 hover:bg-orange-500 hover:text-white rounded-xl" startContent={<FiPlus />} onClick={() => setSteps([...steps, ""])}>
-                    Add Step Line
+                <Button type="button" size="sm" variant="ghost" className="border-orange-500/30 text-orange-400 hover:bg-orange-500 hover:text-white rounded-xl" onClick={() => setSteps([...steps, ""])}>
+                   <FiPlus /> Add Step Line
                 </Button>
             </div>
 
@@ -268,7 +268,7 @@ export default function AddRecipeForm({ user}:AddRecipeFormProps) {
 
             {/* Submit Button */}
             <div className="pt-4">
-                <Button type="submit" isLoading={loading} endContent={!loading && <FiCheckCircle />} className="w-full bg-gradient-to-r from-orange-600 to-amber-600 text-white font-bold py-6 rounded-xl shadow-lg shadow-orange-600/10 hover:opacity-95 cursor-pointer transition-all active:scale-[0.99]">
+                <Button type="submit" isLoading={loading} endContent={!loading && <FiCheckCircle />} className="w-full bg-linear-to-r from-orange-600 to-amber-600 text-white font-bold py-6 rounded-xl shadow-lg shadow-orange-600/10 hover:opacity-95 cursor-pointer transition-all active:scale-[0.99]">
                     Submit & Publish Recipe
                 </Button>
             </div>
