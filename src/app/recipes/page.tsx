@@ -78,7 +78,7 @@ const ExploreRecipesPage = async ({ searchParams }: { searchParams: unknown }) =
 
         {/* 🎴 রেসিپیカード গ্রিড লেআউট */}
         {recipes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 xl:gap-8 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 xl:gap-4 mt-8">
             {recipes.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />
             ))}

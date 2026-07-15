@@ -18,3 +18,10 @@ export const getAllRecipes = async(query : string):Promise<TRecipeResponse> =>{
     const result = await serverFetch<TRecipeResponse>(`/api/public/recipes?${query}`);
     return result;
 }
+
+
+//get recipe by id not protected;
+export const getRecipeById = async(recipeId:string) :Promise<TRecipe> =>{
+    const result = await serverFetch<TRecipe>(`/api/recipes/${recipeId}`);
+    return result;
+}

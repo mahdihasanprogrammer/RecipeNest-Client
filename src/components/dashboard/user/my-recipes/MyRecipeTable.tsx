@@ -3,6 +3,7 @@
 import { Table, Chip, Button, Avatar } from "@heroui/react";
 import { FiEye, FiImage, FiClock } from "react-icons/fi";
 import { DeleteRecipeWithModal } from "./DeleteRecipeModal";
+import Link from "next/link";
 
 interface Recipe {
   _id?: string;
@@ -21,7 +22,7 @@ interface RecipeTableProps {
 
 // ডিফিকাল্টি অনুযায়ী কাস্টম কালার ও গ্লো ডট লজিক
 const difficultySettings: Record<
-  string, 
+  string,
   { color: "success" | "warning" | "danger" | "default"; dot: string }
 > = {
   easy: { color: "success", dot: "bg-emerald-400" },
@@ -36,8 +37,8 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
       <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <Table 
-        aria-label="My Recipes Table" 
+      <Table
+        aria-label="My Recipes Table"
         className="w-full relative z-10"
       >
         <Table.ScrollContainer className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
@@ -104,10 +105,10 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
 
                       {/* ৪. ইউনিক পালস গ্লো চিপ */}
                       <Table.Cell>
-                        <Chip 
-                          size="sm" 
-                          variant="flat" 
-                          color={config.color} 
+                        <Chip
+                          size="sm"
+                          variant="flat"
+                          color={config.color}
                           className="font-bold border border-current/10"
                           startContent={
                             <span className={`w-1.5 h-1.5 rounded-full mr-1 animate-pulse ${config.dot}`} />
@@ -120,8 +121,8 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
                       {/* ৫. ক্রিয়েটেড ডেট */}
                       <Table.Cell>
                         <span className="text-xs text-white/50 font-medium">
-                          {recipe.createdAt 
-                            ? new Date(recipe.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) 
+                          {recipe.createdAt
+                            ? new Date(recipe.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
                             : "N/A"
                           }
                         </span>
@@ -130,14 +131,15 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
                       {/* ৬. প্রিমিয়াম আইকন ট্র্রিগার্স */}
                       <Table.Cell className="text-right">
                         <div className="flex items-center justify-end gap-2.5">
-                          <Button
-                            isIconOnly
-                            size="sm"
-                            className="bg-white/5 border border-white/10 text-white hover:text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/20 rounded-xl h-8.5 w-8.5 transition-all cursor-pointer"
-                            onClick={() => console.log("Viewing recipe:", recipe._id)}
-                          >
-                            <FiEye className="w-4 h-4" />
-                          </Button>
+                          <Link href={`/recipes/${recipe._id}`}>
+                            <Button
+                              isIconOnly
+                              size="sm"
+                              className="bg-white/5 border border-white/10 text-white hover:text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/20 rounded-xl h-8.5 w-8.5 transition-all cursor-pointer"
+                            >
+                              <FiEye className="w-4 h-4" />
+                            </Button>
+                          </Link>
 
                           <DeleteRecipeWithModal recipe={recipe} />
                         </div>
