@@ -13,6 +13,12 @@ export const getMyRecipes = async (creatorId:string):Promise<TRecipe[]> =>{
     return result
 }
 
+// get latest recipe , not protected;
+export const getLatestRecipe = async():Promise<TRecipe[]> =>{
+    const result = await serverFetch<TRecipe[]>(`/api/latest-recipes`);
+    return result;
+}
+
 // public recipe not protected;
 export const getAllRecipes = async(query : string):Promise<TRecipeResponse> =>{
     const result = await serverFetch<TRecipeResponse>(`/api/public/recipes?${query}`);

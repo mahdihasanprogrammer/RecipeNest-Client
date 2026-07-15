@@ -58,7 +58,7 @@ export default function FaqSection() {
     };
 
     return (
-        <section className="relative w-full bg-[#0c0908] py-16 md:py-24 border-b border-white/5 px-4 sm:px-6 lg:px-8">
+        <section className="relative w-full bg-[#0c0908] py-16 md:py-24 border-b border-white/5 ">
             {/* Background Ambience */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[150px] pointer-events-none" />
 

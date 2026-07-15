@@ -79,7 +79,7 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative w-full bg-[#0c0908] overflow-hidden pt-24 pb-16 border-b border-white/5 px-4 sm:px-6 lg:px-8">
+        <section className="relative w-full bg-[#0c0908] overflow-hidden pt-16 md:pt-24 pb-16 border-b border-white/5 px-4 sm:px-6 lg:px-8">
             
             {/* Background Glowing Orbs */}
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -98,7 +98,7 @@ export default function Hero() {
                     clickable: true,
                     el: ".custom-swiper-pagination"
                 }}
-                className="w-full max-w-7xl mx-auto"
+                className="w-full container mx-auto"
             >
                 {slidesData.map((slide, index) => (
                     // ৪. ইউনিক আইডেন্টিফায়ার বা স্লাইডের ইউনিক ডেটা দিয়ে key সেট করা

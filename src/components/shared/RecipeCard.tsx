@@ -23,7 +23,6 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 
     return (
         <Card
-            isPressable
             className="group relative w-full h-115 bg-linear-to-b from-white/3 to-white/1 border border-white/10 backdrop-blur-3xl rounded-2xl overflow-hidden hover:border-orange-500/40 transition-all duration-500 hover:shadow-[0_0_40px_rgba(249,115,22,0.07)]"
         >
             {/* 🔮 ব্যাকগ্রাউন্ডেড নিওন গ্লো অরবিটস (যা হোভার করলে উজ্জ্বল হয়) */}
