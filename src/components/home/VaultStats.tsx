@@ -8,7 +8,7 @@ const VaultStats = () => {
   ];
 
   return (
-    <div className="py-12 my-6 bg-linear-to-b from-white/2 to-transparent border border-white/5 rounded-[2rem] p-8 relative overflow-hidden">
+    <div className="py-12 my-10 md:my-16 bg-linear-to-b from-white/2 to-transparent border border-white/5 rounded-[2rem] p-8 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-20 bg-orange-500/2 rounded-full blur-[60px] pointer-events-none" />
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">

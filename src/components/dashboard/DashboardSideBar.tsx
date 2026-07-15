@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fi';
 import { toast } from 'sonner';
 import { signOut } from '@/lib/auth-client';
+import { TUser } from '@/types/interface';
 
 interface SidebarItem {
   label: string;
@@ -20,7 +21,7 @@ interface SidebarItem {
 }
 
 interface DashboardSidebarProps {
-  session: any;
+  user: TUser;
   userRole: string;
 }
 

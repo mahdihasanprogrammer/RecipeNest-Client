@@ -6,9 +6,10 @@ import DashboardSidebar from '@/components/dashboard/DashboardSideBar';
 
 
 
+
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   // SSR সেশন চেক
-  const user = await getUserSession();
+  const user = await getUserSession()
 
   if (!user) {
     redirect('/login');
