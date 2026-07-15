@@ -3,15 +3,15 @@
 import MyRecipeTable from "@/components/dashboard/user/my-recipes/MyRecipeTable";
 import { getMyRecipes } from "@/lib/api/recipes";
 import { getUserSession } from "@/lib/session";
-import { TUser } from "@/types/interface";
 import Link from "next/link";
 import { FiPlus, FiCoffee } from "react-icons/fi";
 
 const MyRecipesPage = async () => {
-    const user: TUser | null = await getUserSession();
+    const user = await getUserSession();
     
    
     const myRecipes = (await getMyRecipes(user?.id as string)) || [];
+    console.log('user id', user?.id)
     const totalRecipes = myRecipes.length;
 
     return (
@@ -41,7 +41,7 @@ const MyRecipesPage = async () => {
                         href="/dashboard/user/add-recipe" 
                         className="bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 active:scale-[0.98] text-white font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-orange-500/10 transition-all text-sm self-start sm:self-center cursor-pointer"
                     >
-                        <FiPlus className="w-4 h-4 stroke-[3]" /> Add New Recipe
+                        <FiPlus className="w-4 h-4 stroke-0.5" /> Add New Recipe
                     </Link>
                 )}
             </div>

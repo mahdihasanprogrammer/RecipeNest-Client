@@ -1,12 +1,12 @@
 
 export interface TUser {
-    id?: string;
-    name?: string;
-    image?: string;
-    email: string;
-    userRole?: string,
-    createdAt?: string,
-    updatedAt?: string,
+    id?: string,
+    name?: string,
+    image?: string | null | undefined,
+    email: string,
+    userRole?: string | undefined,
+    createdAt?:Date| string,
+    updatedAt?: Date | string,
     emailVerified?: boolean
 }
 

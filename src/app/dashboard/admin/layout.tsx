@@ -2,11 +2,13 @@ import { getUserSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
 
-const UserDashboardLayout = async ({ children }:{children: React.ReactNode}) => {
+const AdminDashboardLayout =async ({children}:{children:React.ReactNode}) => {
+
     const user = await getUserSession();
-    if (user?.userRole !== 'user') {
+    if(user?.userRole !== "admin"){
         redirect('/forbidden')
     }
+
     return (
         <div>
             {children}
@@ -14,4 +16,4 @@ const UserDashboardLayout = async ({ children }:{children: React.ReactNode}) => 
     );
 };
 
-export default UserDashboardLayout;
+export default AdminDashboardLayout;

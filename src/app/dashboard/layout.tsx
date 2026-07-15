@@ -4,9 +4,6 @@ import { getUserSession } from '@/lib/session';
 import DashboardSidebar from '@/components/dashboard/DashboardSideBar';
 
 
-
-
-
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   // SSR সেশন চেক
   const user = await getUserSession()
@@ -16,7 +13,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   }
 
   // userRole বা role ডায়নামিক এক্সট্রাকশন
-  const userRole = user.userRole || 'user';
+  const userRole = user?.userRole || 'user';
 
   return (
     <div className="flex h-screen  bg-[#0f0d0b] text-white overflow-hidden">

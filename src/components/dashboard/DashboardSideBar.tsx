@@ -21,7 +21,7 @@ interface SidebarItem {
 }
 
 interface DashboardSidebarProps {
-  user: TUser;
+  user?: TUser;
   userRole: string;
 }
 

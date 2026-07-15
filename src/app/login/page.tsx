@@ -173,17 +173,17 @@ const LoginPage = () => {
             </p>
 
             {/* Quick Sandbox Environment Demo Logins */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
+            <div className="grid grid-cols-1 gap-3 mb-5">
               <Button
                 type="button"
                 disabled={loading || googleLoading}
                 onClick={() => handleDemoLogin('user')}
-                className="bg-white/5 border border-white/10 hover:border-amber-500/30 text-white/80 font-medium text-xs py-2 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 cursor-pointer"
+                className="w-full bg-white/5 border border-white/10 hover:border-amber-500/30 text-white/80 font-medium text-xs py-2 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 cursor-pointer"
               >
                 <FiUser size={13} className="text-amber-400" />
                 <span>Demo User</span>
               </Button>
-              <Button
+              {/* <Button
                 type="button"
                 disabled={loading || googleLoading}
                 onClick={() => handleDemoLogin('admin')}
@@ -191,7 +191,7 @@ const LoginPage = () => {
               >
                 <FiShield size={13} className="text-orange-400" />
                 <span>Demo Admin</span>
-              </Button>
+              </Button> */}
             </div>
 
             <div className="relative mb-5 flex items-center justify-center">

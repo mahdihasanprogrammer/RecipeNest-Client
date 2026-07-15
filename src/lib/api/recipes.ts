@@ -1,5 +1,5 @@
 import { TContributors, TRecipe } from "@/types/interface";
-import { serverFetch } from "../core/server"
+import { protectedFetch, serverFetch } from "../core/server"
 
 export type TRecipeResponse = {
   recipes: TRecipe[];
@@ -9,7 +9,9 @@ export type TRecipeResponse = {
 // user handle this;
 
 export const getMyRecipes = async (creatorId:string):Promise<TRecipe[]> =>{
-    const result =await serverFetch<TRecipe[]>(`/api/my-recipes/${creatorId}`);
+    
+    const result =await protectedFetch<TRecipe[]>(`/api/my-recipe/${creatorId}`);
+ 
     return result
 }
 
