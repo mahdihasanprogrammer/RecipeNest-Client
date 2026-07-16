@@ -4,52 +4,44 @@ import { Table, Chip, Button, Avatar } from "@heroui/react";
 import { FiEye, FiImage, FiClock } from "react-icons/fi";
 import { DeleteRecipeWithModal } from "./DeleteRecipeModal";
 import Link from "next/link";
+import { TRecipe } from "@/types/interface";
 
-interface Recipe {
-  _id?: string;
-  title: string;
-  shortDesc: string;
-  cookTime: string;
-  difficulty: string;
-  cuisine: string;
-  coverImage?: string;
-  createdAt?: string;
-}
+
 
 interface RecipeTableProps {
-  recipes: Recipe[];
+  recipes: TRecipe[];
 }
 
-// ডিফিকাল্টি অনুযায়ী কাস্টম কালার ও গ্লো ডট লজিক
-const difficultySettings: Record<
+// ডিফিকাল্টি অনুযায়ী কাস্টম বর্ডার, টেক্সট এবং গ্লো ডট ক্লাসেস (বিশুদ্ধ Tailwind)
+const difficultyClasses: Record<
   string,
-  { color: "success" | "warning" | "danger" | "default"; dot: string }
+  { border: string; text: string; bg: string; dot: string }
 > = {
-  easy: { color: "success", dot: "bg-emerald-400" },
-  medium: { color: "warning", dot: "bg-amber-400" },
-  hard: { color: "danger", dot: "bg-rose-500" },
+  easy: { border: "border-emerald-500/20", text: "text-emerald-400", bg: "bg-emerald-500/10", dot: "bg-emerald-400" },
+  medium: { border: "border-amber-500/20", text: "text-amber-400", bg: "bg-amber-500/10", dot: "bg-amber-400" },
+  hard: { border: "border-rose-500/20", text: "text-rose-400", bg: "bg-rose-500/10", dot: "bg-rose-500" },
 };
 
 export default function MyRecipeTable({ recipes }: RecipeTableProps) {
   return (
-    <div className="relative w-full bg-white/2 border border-white/10 backdrop-blur-3xl rounded-[2rem] p-4  shadow-2xl shadow-black/50 overflow-hidden">
+    <div className="relative w-full bg-white/2 border border-white/10 backdrop-blur-3xl rounded-[2rem] p-4 shadow-2xl shadow-black/50 overflow-hidden">
       {/* কার্ড ব্যাকগ্রাউন্ড গ্লো ইফেক্ট */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <Table
         aria-label="My Recipes Table"
-        className="w-full relative z-10"
+        className="w-full relative z-10 text-white"
       >
         <Table.ScrollContainer className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
           <Table.Content className="min-w-206">
             <Table.Header>
-              <Table.Column isRowHeader>Recipe</Table.Column>
-              <Table.Column>Cuisine</Table.Column>
-              <Table.Column>Cook Time</Table.Column>
-              <Table.Column>Difficulty</Table.Column>
-              <Table.Column>Created At</Table.Column>
-              <Table.Column className="text-right">Actions</Table.Column>
+              <Table.Column isRowHeader className="text-white/60">Recipe</Table.Column>
+              <Table.Column className="text-white/60">Cuisine</Table.Column>
+              <Table.Column className="text-white/60">Cook Time</Table.Column>
+              <Table.Column className="text-white/60">Difficulty</Table.Column>
+              <Table.Column className="text-white/60">Created At</Table.Column>
+              <Table.Column className="text-right text-white/60">Actions</Table.Column>
             </Table.Header>
 
             <Table.Body>
@@ -62,10 +54,15 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
               ) : (
                 recipes.map((recipe, index) => {
                   const difficultyLower = recipe.difficulty?.toLowerCase() || "easy";
-                  const config = difficultySettings[difficultyLower] || { color: "default", dot: "bg-white/40" };
+                  const design = difficultyClasses[difficultyLower] || { 
+                    border: "border-white/10", 
+                    text: "text-white/70", 
+                    bg: "bg-white/5", 
+                    dot: "bg-white/40" 
+                  };
 
                   return (
-                    <Table.Row key={recipe._id || index}>
+                    <Table.Row key={recipe._id || index} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                       {/* ১. রেসিপি কভার ইমেজ + মেটা */}
                       <Table.Cell className="py-4">
                         <div className="flex items-center gap-4">
@@ -78,10 +75,10 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
                             </Avatar.Fallback>
                           </Avatar>
                           <div className="overflow-hidden flex flex-col gap-0.5">
-                            <p className="text-sm font-semibold text-white tracking-wide truncate max-w-[200px]">
+                            <p className="text-sm font-semibold text-white tracking-wide truncate max-w-50">
                               {recipe.title}
                             </p>
-                            <p className="text-[11px] text-white/40 font-medium truncate max-w-[220px]">
+                            <p className="text-[11px] text-white/40 font-medium truncate max-w-50">
                               {recipe.shortDesc}
                             </p>
                           </div>
@@ -103,22 +100,17 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
                         </div>
                       </Table.Cell>
 
-                      {/* ৪. ইউনিক পালস গ্লো চিপ */}
+                      {/* ৪. ইউনিক পালস গ্লো চিপ (startContent ছাড়া) */}
                       <Table.Cell>
                         <Chip
-                          size="sm"
-                          variant="flat"
-                          color={config.color}
-                          className="font-bold border border-current/10"
-                          startContent={
-                            <span className={`w-1.5 h-1.5 rounded-full mr-1 animate-pulse ${config.dot}`} />
-                          }
+                          className={`font-bold border px-2.5 py-1 rounded-full text-xs flex items-center gap-1.5 w-fit ${design.bg} ${design.border} ${design.text}`}
                         >
+                          <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${design.dot}`} />
                           {recipe.difficulty}
                         </Chip>
                       </Table.Cell>
 
-                      {/* ৫. ক্রিয়েটেড ডেট */}
+                      {/* ৫. ক্রিয়েটেড ডেট */}
                       <Table.Cell>
                         <span className="text-xs text-white/50 font-medium">
                           {recipe.createdAt
@@ -128,14 +120,12 @@ export default function MyRecipeTable({ recipes }: RecipeTableProps) {
                         </span>
                       </Table.Cell>
 
-                      {/* ৬. প্রিমিয়াম আইকন ট্র্রিগার্স */}
+                      {/* ৬. প্রিমিয়াম আইকন ট্রিগার্স */}
                       <Table.Cell className="text-right">
                         <div className="flex items-center justify-end gap-2.5">
                           <Link href={`/recipes/${recipe._id}`}>
                             <Button
-                              isIconOnly
-                              size="sm"
-                              className="bg-white/5 border border-white/10 text-white hover:text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/20 rounded-xl h-8.5 w-8.5 transition-all cursor-pointer"
+                              className="p-0 flex items-center justify-center bg-white/5 border border-white/10 text-white hover:text-orange-400 hover:bg-orange-500/10 hover:border-orange-500/20 rounded-xl h-8.5 w-8.5 transition-all cursor-pointer"
                             >
                               <FiEye className="w-4 h-4" />
                             </Button>

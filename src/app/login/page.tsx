@@ -176,7 +176,7 @@ const LoginPage = () => {
             <div className="grid grid-cols-1 gap-3 mb-5">
               <Button
                 type="button"
-                disabled={loading || googleLoading}
+                isDisabled={loading || googleLoading}
                 onClick={() => handleDemoLogin('user')}
                 className="w-full bg-white/5 border border-white/10 hover:border-amber-500/30 text-white/80 font-medium text-xs py-2 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 cursor-pointer"
               >
@@ -238,11 +238,11 @@ const LoginPage = () => {
 
               <Button
                 type="submit"
-                disabled={loading || googleLoading}
+                isDisabled={loading || googleLoading}
                 className="w-full mt-2 bg-linear-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold tracking-wider py-3 rounded-xl transition-all duration-300 shadow-xl shadow-amber-600/10 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
               >
                 {loading ? (
-                  <><Spinner size="sm" color="white" /> Logging in...</>
+                  <><Spinner size="sm" className='text-white' /> Logging in...</>
                 ) : (
                   <>
                     <FiLogIn className="text-sm text-white/90" />
@@ -264,14 +264,14 @@ const LoginPage = () => {
             <Button
               type="button"
               onClick={handleGoogleSignIn}
-              disabled={loading || googleLoading}
+              isDisabled={loading || googleLoading}
               className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-sm py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2.5 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
             >
               {googleLoading ? <Spinner size="sm" color="current" /> : <><FcGoogle className="text-xl" /><span>Google Authenticate</span></>}
             </Button>
 
             <p className="mt-6 text-center text-sm text-white/50">
-              Don't have an account yet?{" "}
+              Don&apos;t have an account yet?{" "}
               <Link
                 href="/register"
                 className="font-semibold text-amber-400 hover:text-amber-300 transition-colors underline underline-offset-4 decoration-amber-500/40"

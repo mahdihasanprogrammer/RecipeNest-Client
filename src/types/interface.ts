@@ -41,3 +41,17 @@ export interface TContributors{
     creatorImage: string,
     contribute: number
 }
+
+// chart type sef;
+export interface TChartDayData {
+  day: 'Sun' | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat';
+  count: number;
+}
+
+export interface TUserDashboardStatsResponse {
+  totalRecipes: number;
+  todayCreated: number;
+  totalCuisine: number;
+  recentRecipes: TRecipe[];
+  chartData: TChartDayData[];
+}

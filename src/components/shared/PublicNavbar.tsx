@@ -3,24 +3,25 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Spinner, Avatar } from '@heroui/react'; 
+import { Spinner, Avatar } from '@heroui/react';
 import { PiChefHat } from 'react-icons/pi';
 import { FiLogOut, FiUser, FiPlusCircle, FiBookOpen, FiGrid, FiShield, FiMenu, FiX } from 'react-icons/fi';
 import { toast } from 'sonner';
 import { useSession, signOut } from '@/lib/auth-client';
+import { TUser } from '@/types/interface';
 
 export default function PublicNavbar() {
   const { data: session, isPending } = useSession();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
-   // Hide navbar on dashboard routes
+  // Hide navbar on dashboard routes
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent):void {
+    function handleClickOutside(event: MouseEvent): void {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
@@ -29,7 +30,7 @@ export default function PublicNavbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if(pathname.includes('/dashboard')) return null;
+  if (pathname.includes('/dashboard')) return null;
   const handleLogout = async () => {
     try {
       await signOut({
@@ -40,20 +41,20 @@ export default function PublicNavbar() {
           }
         }
       });
-    } catch (err:any) {
-      toast.error(err.message || "Logout failed. Please try again." );
+    } catch (err: unknown) {
+      toast.error((err as any).message || "Logout failed. Please try again.");
     }
   };
 
   const isActive = (path: string) => pathname === path;
-  const isAdmin = session?.user?.userRole === 'admin';
+  const isAdmin = (session?.user as TUser)?.userRole === 'admin';
 
   return (
     <nav className="sticky top-0 left-0 w-full z-50 bg-[#0f0d0b]/90 backdrop-blur-md border-b border-white/10 text-white transition-all">
       {/* Tailwind Container Utility applied here */}
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-16">
-          
+
           {/* Brand Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 group">
@@ -89,14 +90,14 @@ export default function PublicNavbar() {
             ) : session ? (
               /* Profile Dropdown Container */
               <div className="relative" ref={dropdownRef}>
-                <button 
+                <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center focus:outline-none rounded-full ring-2 ring-amber-500/50 hover:ring-amber-400 transition-all p-0.5"
                 >
                   {/* HeroUI v3.1.0 Compound Component Anatomy */}
                   <Avatar className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
-                    <Avatar.Image 
-                      src={session.user.image || "https://images.unsplash.com/photo-1577219491135-ce391730fb2c"} 
+                    <Avatar.Image
+                      src={session.user.image || "https://images.unsplash.com/photo-1577219491135-ce391730fb2c"}
                       alt={session.user.name || "Chef"}
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
@@ -116,7 +117,7 @@ export default function PublicNavbar() {
                     </div>
 
                     {isAdmin && (
-                      <button 
+                      <button
                         onClick={() => { router.push('/dashboard/admin'); setIsDropdownOpen(false); }}
                         className="w-full text-left px-4 py-2 text-xs text-orange-300 hover:bg-white/5 flex items-center gap-2 transition-colors cursor-pointer"
                       >
@@ -124,25 +125,25 @@ export default function PublicNavbar() {
                       </button>
                     )}
 
-                    <button 
+                    <button
                       onClick={() => { router.push('/dashboard/user'); setIsDropdownOpen(false); }}
                       className="w-full text-left px-4 py-2 text-xs hover:bg-white/5 flex items-center gap-2 transition-colors cursor-pointer"
                     >
                       <FiGrid className="text-amber-400" /> Dashboard
                     </button>
-                    <button 
+                    <button
                       onClick={() => { router.push('/dashboard/user/add-recipe'); setIsDropdownOpen(false); }}
                       className="w-full text-left px-4 py-2 text-xs hover:bg-white/5 flex items-center gap-2 transition-colors cursor-pointer"
                     >
                       <FiPlusCircle className="text-amber-400" /> Add Recipe
                     </button>
-                    <button 
+                    <button
                       onClick={() => { router.push('/dashboard/user/my-recipes'); setIsDropdownOpen(false); }}
                       className="w-full text-left px-4 py-2 text-xs hover:bg-white/5 flex items-center gap-2 transition-colors cursor-pointer"
                     >
                       <FiBookOpen className="text-amber-400" /> My Recipes
                     </button>
-                    <button 
+                    <button
                       onClick={() => { router.push('/dashboard/user/profile'); setIsDropdownOpen(false); }}
                       className="w-full text-left px-4 py-2 text-xs hover:bg-white/5 flex items-center gap-2 transition-colors cursor-pointer"
                     >
@@ -150,7 +151,7 @@ export default function PublicNavbar() {
                     </button>
 
                     <div className="border-t border-white/5 mt-1">
-                      <button 
+                      <button
                         onClick={() => { handleLogout(); setIsDropdownOpen(false); }}
                         className="w-full text-left px-4 py-2 text-xs text-rose-400 hover:bg-rose-500/10 flex items-center gap-2 transition-colors cursor-pointer"
                       >
@@ -174,7 +175,7 @@ export default function PublicNavbar() {
 
           {/* Hamburger Trigger (Mobile) */}
           <div className="md:hidden flex items-center">
-            <button 
+            <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className="p-2 text-white/80 hover:text-white focus:outline-none"
             >

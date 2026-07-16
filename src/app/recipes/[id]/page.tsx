@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { Avatar, Chip } from "@heroui/react";
-import { FiClock, FiUsers, FiGlobe, FiTrendingUp, FiCheckCircle, FiChevronRight, FiUser, FiMail, FiCalendar } from "react-icons/fi";
+import { FiClock, FiUsers, FiGlobe, FiTrendingUp, FiCheckCircle, FiUser, FiMail, FiCalendar } from "react-icons/fi";
 
-import { TRecipe } from '@/types/interface';
+
 import { getRecipeById } from '@/lib/api/recipes';
 
 // ডিফিকাল্টি ভিত্তিক কালার থিম
@@ -29,7 +29,7 @@ const RecipeDetailsPage = async ({ params }: PageProps) => {
   const diffColor = difficultyColors[difficultyLower] || "default";
 
   // ডেট ফরম্যাটিং
-  const formattedDate = new Date(recipe.createdAt).toLocaleDateString("en-US", {
+  const formattedDate = new Date(recipe.createdAt as string | Date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -65,7 +65,7 @@ const RecipeDetailsPage = async ({ params }: PageProps) => {
                   <FiGlobe /> {recipe.cuisine}
                 </div>
               </Chip>
-              <Chip size="sm" color={diffColor} variant="flat" className="font-extrabold uppercase border border-current/10">
+              <Chip size="sm" color={diffColor} className="font-extrabold uppercase border border-current/10">
                 <div className="flex items-center gap-1">
                   <FiTrendingUp /> {recipe.difficulty}
                 </div>

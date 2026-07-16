@@ -3,26 +3,33 @@
 import { Pagination } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export function PaginationPage({totalRecipe}) {
+interface PaginationPageProps {
+  totalRecipe?: number;
+}
+
+export function PaginationPage({ totalRecipe = 0 }: PaginationPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 1. Directly read page from URL (No useState, No useEffect)
+  // 1. Directly read page from URL (Fallback to 1 if not a valid number)
   const page = Number(searchParams.get('page')) || 1;
   
   const totalItems = totalRecipe;
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(totalItems / itemsPerPage) || 1; // 0 হলে যেন অন্তত ১টি পেজ থাকে
 
   // 2. Pure function to handle page change without triggering side effects
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("page", newPage);
+    params.set("page", newPage.toString()); // URLSearchParams এ সবসময় string সেট করতে হয়
     router.push(`?${params.toString()}`);
   };
 
-  const getPageNumbers = () => {
-    const pages = [];
+  // 3. Strongly typed page numbers array (string for 'ellipsis', number for page numbers)
+  const getPageNumbers = (): (number | string)[] => {
+    if (totalPages <= 1) return [1];
+
+    const pages: (number | string)[] = [];
     pages.push(1);
 
     if (page > 3) {
@@ -44,7 +51,7 @@ export function PaginationPage({totalRecipe}) {
     return pages;
   };
 
-  const startItem = (page - 1) * itemsPerPage + 1;
+  const startItem = totalItems === 0 ? 0 : (page - 1) * itemsPerPage + 1;
   const endItem = Math.min(page * itemsPerPage, totalItems);
 
   return (
@@ -54,8 +61,10 @@ export function PaginationPage({totalRecipe}) {
       </Pagination.Summary>
       <Pagination.Content>
         <Pagination.Item>
-          {/* Use explicit handlePageChange trigger */}
-          <Pagination.Previous isDisabled={page === 1} onPress={() => handlePageChange(page - 1)}>
+          <Pagination.Previous 
+            isDisabled={page === 1 || totalItems === 0} 
+            onPress={() => handlePageChange(page - 1)}
+          >
             <Pagination.PreviousIcon />
             <span>Previous</span>
           </Pagination.Previous>
@@ -68,16 +77,21 @@ export function PaginationPage({totalRecipe}) {
             </Pagination.Item>
           ) : (
             <Pagination.Item key={p}>
-              <Pagination.Link isActive={p === page} onPress={() => handlePageChange(p)}>
+              <Pagination.Link 
+                isActive={p === page} 
+                onPress={() => handlePageChange(p as number)}
+              >
                 {p}
               </Pagination.Link>
             </Pagination.Item>
-          ),
+          )
         )}
 
         <Pagination.Item>
-          {/* Use explicit handlePageChange trigger */}
-          <Pagination.Next isDisabled={page === totalPages} onPress={() => handlePageChange(page + 1)}>
+          <Pagination.Next 
+            isDisabled={page === totalPages || totalItems === 0} 
+            onPress={() => handlePageChange(page + 1)}
+          >
             <span>Next</span>
             <Pagination.NextIcon />
           </Pagination.Next>

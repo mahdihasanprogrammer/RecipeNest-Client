@@ -217,11 +217,11 @@ const RegisterPage = () => {
 
               <Button
                 type="submit"
-                disabled={loading || googleLoading}
+                isDisabled={loading || googleLoading}
                 className="w-full mt-2 bg-linear-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold tracking-wider py-3 rounded-xl transition-all duration-300 shadow-xl shadow-amber-600/10 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {loading ? (
-                  <><Spinner size="sm" color="white" /> Creating Account...</>
+                  <><Spinner size="sm" className='text-white' /> Creating Account...</>
                 ) : (
                   <>
                     <LuUserPlus className="text-sm text-white/90" />
@@ -243,7 +243,7 @@ const RegisterPage = () => {
             <Button
               type="button"
               onClick={handleGoogleSignIn}
-              disabled={loading || googleLoading}
+              isDisabled={loading || googleLoading}
               className="w-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-sm py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2.5 active:scale-[0.98] disabled:opacity-50"
             >
               {googleLoading ? <Spinner size="sm" color="current" /> : <><FcGoogle className="text-xl" /><span>Google Authenticate</span></>}

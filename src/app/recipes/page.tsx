@@ -13,7 +13,7 @@ const ExploreRecipesPage = async ({ searchParams }: { searchParams: unknown }) =
 
   const { recipes, totalRecipe } = (await getAllRecipes(queryStr)) as {
     recipes: TRecipe[];
-    totalRecipe: number;
+    totalRecipe?: number;
   };
 
   return (

@@ -70,7 +70,7 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
   };
 
   return (
-    <div className="relative w-full bg-white/2 border border-white/10 backdrop-blur-3xl rounded-[2rem] p-6 md:p-10 shadow-2xl shadow-black/50 overflow-hidden">
+    <div className="relative w-full bg-white/5 border border-white/10 backdrop-blur-3xl rounded-[2rem] p-6 md:p-10 shadow-2xl shadow-black/50 overflow-hidden">
       <div className="absolute -top-10 -right-10 w-72 h-72 bg-orange-500/5 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-amber-500/5 rounded-full blur-[80px] pointer-events-none" />
 
@@ -99,7 +99,6 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
 
         <Button
           onClick={handleOpenModal}
-          size="sm"
           className="bg-white/5 hover:bg-white/10 border border-white/10 text-white/80 rounded-xl text-xs h-8 font-medium transition-all active:scale-[0.95] cursor-pointer flex items-center gap-1.5 px-3"
         >
           <FiEdit2 className="w-3 h-3" /> Edit Profile
@@ -107,7 +106,7 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
       </div>
 
       {isOpen && (
-        <AlertDialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <AlertDialog isOpen={isOpen} onOpenChange={(open) => setIsOpen(open)}>
           <AlertDialog.Backdrop className="backdrop-blur-md bg-black/60 fixed inset-0 z-[9998]" />
           <AlertDialog.Container className="fixed inset-0 flex items-center justify-center p-4 z-[9999] mx-auto">
             <AlertDialog.Dialog className="w-full sm:min-w-sm bg-[#0f0a24] border border-white/10 rounded-2xl overflow-hidden p-6 relative shadow-2xl">
@@ -134,6 +133,7 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
                     onChange={(e) => setName(e.target.value)}
                     required
                     placeholder="Enter your name"
+                    className="bg-[#14110f] border border-white/10 hover:border-orange-500/50 focus:!border-orange-500 text-white placeholder:text-white/40 rounded-xl px-3 py-2 transition-all"
                   />
                 </div>
 
@@ -146,6 +146,7 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="https://example.com/your-photo.jpg"
+                    className="bg-[#14110f] border border-white/10 hover:border-orange-500/50 focus:!border-orange-500 text-white placeholder:text-white/40 rounded-xl px-3 py-2 transition-all"
                   />
                 </div>
 
@@ -160,20 +161,20 @@ export default function ProfileForm({ initialUser }: ProfileFormProps) {
                   <Button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    disabled={isUpdating}
+                    isDisabled={isUpdating}
                     className="bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 rounded-xl text-xs h-9 px-4 font-medium transition-all disabled:opacity-40 cursor-pointer"
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
-                    disabled={isUpdating}
-                    className="bg-linear-to-r from-orange-500 to-amber-500 text-white text-xs font-bold h-9 px-5 rounded-xl shadow-lg shadow-orange-600/20 active:scale-[0.97] transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                    isDisabled={isUpdating}
+                    className="bg-linear-to-r from-orange-500 to-amber-500 text-white text-xs font-bold h-9 px-5 rounded-xl shadow-lg shadow-orange-600/20 active:scale-[0.97] transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer border-0"
                   >
                     {isUpdating ? (
                       <>
                         <FiRefreshCw className="animate-spin w-3.5 h-3.5" /> Updating...
-                      </>
+                      </                    >
                     ) : (
                       <>
                         <FiCheck className="w-3.5 h-3.5" /> Save Changes

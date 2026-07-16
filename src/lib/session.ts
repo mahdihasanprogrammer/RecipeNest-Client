@@ -1,6 +1,6 @@
 "use server"
 
-import { TUser } from "@/types/interface";
+
 import { auth } from "./auth"; // path to your Better Auth server instance
 import { headers } from "next/headers";
 

@@ -1,10 +1,10 @@
 import ProfileForm from "@/components/dashboard/user/profile/ProfileForm";
 import { getUserSession } from "@/lib/session";
-import { TUser } from "@/types/interface";
+
 
 
 const UserProfilePage = async () => {
-  const user: TUser | null = await getUserSession();
+  const user = await getUserSession();
 
   // যদি ইউজার সেশন না থাকে তবে সেফটি চেক
   const initialUserData = {

@@ -33,7 +33,7 @@ export default function DashboardSkeleton() {
           {/* স্ট্যাটস কার্ড গ্রিড */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
-              <Card key={i} className="bg-white/5 border border-white/10 p-5 rounded-2xl space-y-4" shadow="none">
+              <Card key={i} className="bg-white/5 border border-white/10 p-5 rounded-2xl space-y-4" >
                 <div className="flex justify-between items-center">
                   <Skeleton className="w-24 h-4 rounded-md bg-white/15" />
                   <Skeleton className="w-8 h-8 rounded-xl bg-white/15" />
@@ -48,7 +48,7 @@ export default function DashboardSkeleton() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             {/* বড় টেবিল কন্টেইনার */}
-            <Card className="lg:col-span-2 bg-white/5 border border-white/10 p-6 rounded-2xl space-y-5" shadow="none">
+            <Card className="lg:col-span-2 bg-white/5 border border-white/10 p-6 rounded-2xl space-y-5" >
               <div className="flex justify-between items-center mb-2">
                 <Skeleton className="w-40 h-5 rounded-lg bg-white/15" />
                 <Skeleton className="w-20 h-8 rounded-xl bg-white/15" />
@@ -69,7 +69,7 @@ export default function DashboardSkeleton() {
             </Card>
 
             {/* সাইড রিসেন্ট অ্যাক্টিভিটি */}
-            <Card className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-5" shadow="none">
+            <Card className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-5" >
               <Skeleton className="w-32 h-5 rounded-lg bg-white/15 mb-2" />
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="space-y-3 py-1">
