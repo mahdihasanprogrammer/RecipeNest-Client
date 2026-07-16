@@ -78,8 +78,8 @@ export default function PublicNavbar() {
             <Link href="/about" className={`text-sm font-medium transition-colors ${isActive('/about') ? 'text-amber-400' : 'text-white/70 hover:text-white'}`}>
               About
             </Link>
-            <Link href="/contact" className={`text-sm font-medium transition-colors ${isActive('/contact') ? 'text-amber-400' : 'text-white/70 hover:text-white'}`}>
-              Contact
+            <Link href="/blog" className={`text-sm font-medium transition-colors ${isActive('/contact') ? 'text-amber-400' : 'text-white/70 hover:text-white'}`}>
+              Blog
             </Link>
           </div>
 
@@ -197,8 +197,8 @@ export default function PublicNavbar() {
           <Link href="/about" onClick={() => setIsMobileOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-white/80 hover:text-white hover:bg-white/5">
             About
           </Link>
-          <Link href="/contact" onClick={() => setIsMobileOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-white/80 hover:text-white hover:bg-white/5">
-            Contact
+          <Link href="/blog" onClick={() => setIsMobileOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-white/80 hover:text-white hover:bg-white/5">
+            Blog
           </Link>
 
           <div className="pt-4 border-t border-white/10 mt-4">

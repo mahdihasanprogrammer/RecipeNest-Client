@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@heroui/react";
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiPhone, FiMapPin, FiHeart, FiFacebook } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiPhone, FiMapPin, FiHeart, FiFacebook } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 
 interface SocialLink {
@@ -24,44 +24,36 @@ interface SitemapColumn {
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
-    // প্রফেশনাল এবং প্ল্যাটফর্ম-লকড সোশ্যাল লিংকসমূহ
+    // প্রফেশনাল সোশ্যাল লিংকসমূহ (Fully Working)
     const socialLinks: SocialLink[] = [
         { icon: <FiGithub size={18} />, href: "https://github.com/mahdihasanprogrammer", label: "GitHub" },
         { icon: <FiLinkedin size={18} />, href: "https://www.linkedin.com/in/mahdi-hasan-web", label: "LinkedIn" },
         { icon: <FiFacebook size={18} />, href: "https://www.facebook.com/hasan.shardar.1", label: "Facebook" }
     ];
 
+    // শুধুমাত্র কার্যকরী (Working) লিংকগুলোর জন্য সাইটম্যাপ আপডেট করা হলো
     const sitemapColumns: SitemapColumn[] = [
         {
             title: "Company",
             links: [
                 { label: "About Us", href: "/about" },
-                { label: "Contact", href: "/contact" },
-                { label: "Careers", href: "/careers" }
+                { label: "Blog", href: "/blog" }
             ]
         },
         {
             title: "Explore",
             links: [
-                { label: "All Recipes", href: "/recipes" },
-                { label: "Categories", href: "/categories" },
-                { label: "Meal Planner", href: "/dashboard/meal-planner" }
-            ]
-        },
-        {
-            title: "Legal",
-            links: [
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Service", href: "/terms" },
-                { label: "Cookie Policy", href: "/cookies" }
+                { label: "All Recipes", href: "/recipes" }
             ]
         }
     ];
 
     const pathName = usePathname();
-    if(pathName.includes("/dashboard")) {
+    
+    if (pathName?.includes("/dashboard")) {
         return null; 
     }
+
     return (
         <footer className="relative w-full bg-[#0c0908] text-white border-t border-white/5 pt-16 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden">
             
@@ -82,6 +74,7 @@ export default function Footer() {
                             Preserving tomorrow&apos;s culinary wisdom today. Build your digital formula vault, map your macro nutrition, and share processes with food enthusiasts.
                         </p>
                         
+                        {/* 📞 Contact Information (Fully Functional Links) */}
                         <div className="space-y-3 pt-2 text-xs text-white/60">
                             <div className="flex items-center gap-3">
                                 <FiMail className="text-orange-400 shrink-0" size={14} />
@@ -91,7 +84,7 @@ export default function Footer() {
                             </div>
                             <div className="flex items-center gap-3">
                                 <FiPhone className="text-orange-400 shrink-0" size={14} />
-                                <a href="tel:+1234567890" className="hover:text-orange-400 transition-colors">
+                                <a href="tel:+8801400596304" className="hover:text-orange-400 transition-colors">
                                     +8801400596304
                                 </a>
                             </div>
@@ -102,7 +95,7 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Sitemap Columns */}
+                    {/* Sitemap Columns (Rendered based on updated working links) */}
                     <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
                         {sitemapColumns.map((column) => (
                             <div key={column.title} className="space-y-4">
@@ -130,7 +123,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     
-                    {/* Social Buttons - Wrapped with Next.js Link instead of 'as' attribute */}
+                    {/* Social Links Panel (Fully Functional) */}
                     <div className="flex items-center gap-3 order-last sm:order-first">
                         {socialLinks.map((social) => (
                             <Link 
@@ -151,7 +144,7 @@ export default function Footer() {
                         ))}
                     </div>
 
-                    {/* Copyright Notice */}
+                    {/* Copyright & Dev Credit */}
                     <div className="flex items-center gap-1.5 text-xs text-white/40 text-center sm:text-right">
                         <span>&copy; {currentYear} RecipeNest. All rights reserved.</span>
                         <span className="hidden sm:inline">|</span>
